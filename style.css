@@ -1,0 +1,217 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* Common Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+header {
+  padding: 2rem;
+  background-color: #089643;
+}
+
+header h1 {
+  font-size: 4rem;
+  color: #fefefe;
+  letter-spacing: 0.1rem;
+}
+
+main {
+  max-width: 80rem;
+  padding: 4rem;
+  margin: 0 auto;
+}
+
+button {
+  opacity: 0.8;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+button:active {
+  transform: translateY(-0.1rem);
+}
+
+.section {
+  width: 100%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1.6rem;
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: 0.1rem 0.1rem 1rem #bbbbbb;
+  padding: 4rem 3rem;
+  border-radius: 1rem;
+}
+
+.section > h2 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+/* End of Common */
+
+/* Input Book */
+.input-form,
+.list-book {
+  max-width: 60rem;
+  margin-bottom: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-form > label {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.input-form > input {
+  font-size: 1.4rem;
+  padding: 0.6rem;
+  width: 100%;
+  border: 0.2rem solid #707070;
+  border-radius: 0.6rem;
+}
+
+.input-form > label > input[type="checkbox"] {
+  vertical-align: middle;
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.input-form > button,
+.input-form > button.cancel,
+.btn-success,
+.btn-trash,
+.btn-edit {
+  padding: 1rem;
+  width: 100%;
+  height: 4.6rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background-color: #089643;
+  color: #fefefe;
+}
+
+.input-form > button:not(:last-child) {
+  margin-bottom: 0.6rem;
+}
+
+.input-form > button.cancel,
+.btn-trash {
+  background-color: #c3201b;
+}
+
+.input-form > button.cancel.hide {
+  display: none;
+}
+
+.input-form > button.cancel,
+.input-form:not(.inline) > label,
+.input-form > input:not([type="checkbox"]) {
+  display: block;
+}
+/* End of Input Book */
+
+/* List Book */
+.list-book {
+  list-style: none;
+}
+
+.book {
+  width: 100%;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  padding: 2rem;
+  border: 0.2rem solid #089643;
+  border-radius: 0.6rem;
+}
+
+.list-book > li:not(:last-child) {
+  margin-bottom: 1.6rem;
+}
+
+.book > h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+  max-width: 30rem;
+}
+
+.book > h3,
+.book > p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: no-wrap;
+}
+
+.book > p {
+  font-size: 1.4rem;
+  font-weight: 500;
+  max-width: 20rem;
+}
+
+.book > p:nth-child(3) {
+  margin-bottom: 2rem;
+}
+
+.btn-success,
+.btn-trash {
+  height: auto;
+}
+
+.btn-trash,
+.btn-edit {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  right: 2rem;
+  padding: 0.1rem;
+  border-radius: 50%;
+}
+
+.btn-trash {
+  top: 1rem;
+}
+
+.btn-edit {
+  top: 5rem;
+  padding-left: 0.2rem;
+  background-color: #ddad1b;
+}
+/* End of List Book */
+
+/* Custom Toast */
+.toast {
+  position: fixed;
+  width: 30rem;
+  height: 8rem;
+  padding: 3rem 1.5rem;
+  top: 0;
+  left: calc(50% - 15rem);
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fefefe;
+  background-color: #089643;
+  border-radius: 1rem;
+  opacity: 0.6;
+  transform: translateY(-15rem);
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.toast.show {
+  transform: translateY(10rem);
+  opacity: 1;
+}
+/* End of Custom Toast */
