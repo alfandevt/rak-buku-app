@@ -159,6 +159,10 @@ function removeBook(bookId) {
 
   bookList.splice(bookIndex, 1);
 
+  if (editMode) {
+    clearFormBook();
+  }
+
   if (searchMode) {
     clearSearch();
   }
@@ -168,7 +172,7 @@ function removeBook(bookId) {
       detail: { bookList: bookList.slice() },
     })
   );
-  createToast('Berhasil menghapus buku')
+  createToast("Berhasil menghapus buku");
   saveToStorage();
 }
 
@@ -179,6 +183,15 @@ function moveBook(bookId) {
   }
 
   bookObj.isComplete = !bookObj.isComplete;
+
+  if (editMode) {
+    clearFormBook();
+  }
+
+  if (searchMode) {
+    clearSearch();
+  }
+
   document.dispatchEvent(
     new CustomEvent(EVENTS.RENDER_BOOKS, {
       detail: { bookList: bookList.slice() },
