@@ -158,6 +158,10 @@ function removeBook(bookId) {
   }
 
   bookList.splice(bookIndex, 1);
+
+  if (searchMode) {
+    clearSearch();
+  }
   document.dispatchEvent(
     new CustomEvent(EVENTS.RENDER_BOOKS, {
       detail: { bookList: bookList.slice() },
