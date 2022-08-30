@@ -2,11 +2,6 @@ const bookList = [];
 
 const EVENTS = {
   RENDER_BOOKS: "RENDER_BOOKS",
-  SAVED_BOOK: "SAVED_BOOK",
-  EDIT_BOOK: "EDIT_BOOK",
-  DELETE_BOOK: "DELETE_BOOK",
-  COMPLETE_BOOK: "COMPLETE_BOOK",
-  UNCOMPLETE_BOOK: "UNCOMPLETE_BOOK",
 };
 const STORAGE_KEY = "BOOK_APP";
 
@@ -18,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (checkStorageCompat()) {
     loadFromStorage();
   }
+
+  clearFormBook();
+  clearSearch();
+
   document.dispatchEvent(
     new CustomEvent(EVENTS.RENDER_BOOKS, {
       detail: { bookList: bookList.slice() },
@@ -139,6 +138,10 @@ function saveBook() {
     createToast("Berhasil mengubah buku");
   }
 
+  if (searchMode) {
+    clearSearch();
+  }
+
   document.dispatchEvent(
     new CustomEvent(EVENTS.RENDER_BOOKS, {
       detail: { bookList: bookList.slice() },
@@ -200,12 +203,18 @@ function clearFormBook() {
   const btnCancel = document.getElementById("cancel-edit");
   const formBook = document.getElementById("form-book");
   btnCancel.classList.add("hide");
+
+  if (searchMode) {
+    clearSearch();
+  }
+
   formBook.reset();
   editMode = false;
 }
 
 function searchBook() {
   const inputSearch = document.getElementById("search").value;
+  searchMode = true;
   return bookList.slice().filter((book) => {
     return book.title.toLowerCase().includes(inputSearch.toLowerCase());
   });
@@ -216,6 +225,7 @@ function clearSearch() {
   const clearSearchBtn = document.getElementById("clear-search");
   clearSearchBtn.classList.add("hide");
   formSearch.reset();
+  searchMode = false;
 
   document.dispatchEvent(
     new CustomEvent(EVENTS.RENDER_BOOKS, {
@@ -282,6 +292,15 @@ function createBook(bookObj) {
     editBook(bookObj);
   });
 
+  const faTrash = document.createElement("i");
+  faTrash.classList.add("fas", "fa-trash");
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("btn-trash");
+  deleteBtn.append(faTrash);
+  deleteBtn.addEventListener("click", () => {
+    removeBook(bookObj.id);
+  });
+
   if (bookObj.isComplete) {
     const undoBtn = document.createElement("button");
     undoBtn.classList.add("btn-success");
@@ -290,16 +309,7 @@ function createBook(bookObj) {
       moveBook(bookObj.id);
     });
 
-    const faTrash = document.createElement("i");
-    faTrash.classList.add("fas", "fa-trash");
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("btn-trash");
-    deleteBtn.append(faTrash);
-    deleteBtn.addEventListener("click", () => {
-      removeBook(bookObj.id);
-    });
-
-    bookArticle.append(undoBtn, deleteBtn);
+    bookArticle.append(undoBtn);
   } else {
     const completeBtn = document.createElement("button");
     completeBtn.classList.add("btn-success");
@@ -310,7 +320,7 @@ function createBook(bookObj) {
 
     bookArticle.append(completeBtn);
   }
-  bookArticle.append(editBtn);
+  bookArticle.append(deleteBtn, editBtn);
 
   return listItem;
 }
