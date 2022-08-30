@@ -162,11 +162,13 @@ function removeBook(bookId) {
   if (searchMode) {
     clearSearch();
   }
+
   document.dispatchEvent(
     new CustomEvent(EVENTS.RENDER_BOOKS, {
       detail: { bookList: bookList.slice() },
     })
   );
+  createToast('Berhasil menghapus buku')
   saveToStorage();
 }
 
